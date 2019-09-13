@@ -2,8 +2,8 @@
     <div class="card-header">Clientes</div>
     <div class="card-body text-dark">
         <h5 class="card-title">Listado de clientes</h5>
-
-        <table class="table table-striped">
+        <a class="btn btn-rounded btn-success mb-3" [routerLink]="['/clientes/form']">Crear Cliente</a>
+        <table *ngIf="clientes.length > 0" class="table table-striped">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -11,6 +11,8 @@
                     <th>Apellidos</th>
                     <th>Email</th>
                     <th>Fecha</th>
+                    <th>✏️</th>
+                    <th>🗑️</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,8 +22,13 @@
                     <td>{{ cliente.apellidos }}</td>
                     <td>{{ cliente.email }}</td>
                     <td>{{ cliente.createdAt | date:'dd/MM/yyyy' }}</td>
+                    <td><a class="btn bg-transparent" [routerLink]="['/clientes/form', cliente.id]">️️✏️</a></td>
+                    <td><a class="btn bg-transparent" (click)="delete(cliente)">🗑️</a></td>
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="clientes.length == 0" class="alert alert-info">
+            No existen clientes en la base de datos.
+        </div>
     </div>
 </div>
